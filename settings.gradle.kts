@@ -15,4 +15,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "schemars-kotlin"
+rootProject.name = "template-kotlin"

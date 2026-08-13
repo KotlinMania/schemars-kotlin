@@ -462,10 +462,10 @@ webpack-sources@^3.5.0:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.5.0.tgz#87bf7f5801a4e985b1f1c92b64b9620a02f76d08"
   integrity sha512-HPuy+uuoTCaaoEoI1LQ3JN9+vrPBvEesnnX1jADHy728cHSMlq4wUc4afYqahq2B1mhQVZxCXOkNTnXltr+2vQ==
 
-webpack@5.107.2:
-  version "5.107.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.107.2.tgz#dea14dcb177b46b29de15f952f7303691ee2b596"
-  integrity sha512-v7RhXaJbpMlV0D7hC7lb2EbnxkoeUqf9qhKr6lozx3Q48pmFrqqNRmZFUEGmi7pSwm6fCQ2H1IjvCkHqdpVdjQ==
+webpack@5.109.2:
+  version "5.109.2"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.109.2.tgz#b58dc289561c3282db35c210a99379a836a4c28d"
+  integrity sha512-U9/cvLzxObKNEZ9+TtdqrHM5/9z3lgl2c+c4BzbqGxFQvQvBAq87yql5A8pQ+rrMbS496MZJeF5enVBndIy2hw==
   dependencies:
     "@types/estree" "^1.0.8"
     "@types/json-schema" "^7.0.15"

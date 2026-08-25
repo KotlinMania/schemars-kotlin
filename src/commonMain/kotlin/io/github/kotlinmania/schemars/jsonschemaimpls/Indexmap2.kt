@@ -3,8 +3,6 @@
 
 package io.github.kotlinmania.schemars.jsonschemaimpls
 
-import io.github.kotlinmania.indexmap.IndexMap
-import io.github.kotlinmania.indexmap.IndexSet
 import io.github.kotlinmania.schemars.JsonSchema
 import kotlin.native.HiddenFromObjC
 
@@ -26,11 +24,3 @@ class IndexSetSchema<T>(
     inner: JsonSchema,
 ) : JsonSchema by SetSchema(inner)
 
-/** Return the schema implementation for an [IndexMap] value. */
-fun <K, V> IndexMap<K, V>.indexMapJsonSchema(
-    key: JsonSchema,
-    value: JsonSchema,
-): JsonSchema = IndexMapSchema<K, V>(key, value)
-
-/** Return the schema implementation for an [IndexSet] value. */
-fun <T> IndexSet<T>.indexSetJsonSchema(inner: JsonSchema): JsonSchema = IndexSetSchema<T>(inner)

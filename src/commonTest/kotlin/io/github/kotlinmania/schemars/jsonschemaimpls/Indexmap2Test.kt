@@ -1,8 +1,6 @@
 // port-lint: tests tests/integration/indexmap.rs
 package io.github.kotlinmania.schemars.jsonschemaimpls
 
-import io.github.kotlinmania.indexmap.IndexMap
-import io.github.kotlinmania.indexmap.IndexSet
 import io.github.kotlinmania.schemars.Value
 import io.github.kotlinmania.schemars.generate.SchemaGenerator
 import kotlin.test.Test
@@ -11,12 +9,8 @@ import kotlin.test.assertEquals
 class Indexmap2Test {
     @Test
     fun indexMapSchemaMatchesMapSchema() {
-        val map = IndexMap.new<String, Boolean>()
-        map.insert("key", true)
-
         val schema =
-            map
-                .indexMapJsonSchema(StrSchema, BoolSchema)
+            IndexMapSchema<String, Boolean>(StrSchema, BoolSchema)
                 .jsonSchema(SchemaGenerator.default())
                 .serialize() as Value.Object
 
@@ -27,12 +21,8 @@ class Indexmap2Test {
 
     @Test
     fun indexSetSchemaMatchesSetSchema() {
-        val set = IndexSet.new<String>()
-        set.insert("test")
-
         val schema =
-            set
-                .indexSetJsonSchema(StrSchema)
+            IndexSetSchema<String>(StrSchema)
                 .jsonSchema(SchemaGenerator.default())
                 .serialize() as Value.Object
 
@@ -40,3 +30,4 @@ class Indexmap2Test {
         assertEquals(Value.Bool(true), schema.entries["uniqueItems"])
     }
 }
+

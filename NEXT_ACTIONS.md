@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 34/34 (100.0%)
-- **Function parity:** 154/181 matched (target 309) — 85.1%
-- **Class/type parity:** 27/39 matched (target 65) — 69.2%
-- **Combined symbol parity:** 181/220 matched (target 374) — 82.3%
-- **Average inline-code cosine:** 0.47 (function body across 32 matched files)
+- **Function parity:** 160/181 matched (target 335) — 88.4%
+- **Class/type parity:** 28/39 matched (target 69) — 71.8%
+- **Combined symbol parity:** 188/220 matched (target 404) — 85.5%
+- **Average inline-code cosine:** 0.46 (function body across 32 matched files)
 - **Average documentation cosine:** 0.19 (doc text across 32 matched files)
-- **Cheat-zeroed Files:** 9
+- **Cheat-zeroed Files:** 10
 - **Critical Issues:** 24 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -29,14 +29,14 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. schema
 
-- **Target:** `schemars.Schema`
-- **Similarity:** 0.37
+- **Target:** `schemars.Schema [ZERO]`
+- **Similarity:** 0.00
 - **Dependents:** 2
-- **Priority Score:** 2093006.4
-- **Functions:** 20/27 matched (target 26)
-- **Missing functions:** `deserialize`, `serialize`, `eq`, `schema_name`, `schema_id`, `json_schema`, `serialize_schema_property`
-- **Types:** 1/3 matched (target 5)
-- **Missing types:** `Error`, `OrderedKeywordWrapper`
+- **Priority Score:** 2023010.0
+- **Functions:** 26/27 matched (target 52)
+- **Missing functions:** `eq`
+- **Types:** 2/3 matched (target 9)
+- **Missing types:** `Error`
 
 ### 2. generate
 
@@ -295,15 +295,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 25. json_schema_impls.nonzero
+### 25. json_schema_impls.tuple
 
-- **Target:** `jsonschemaimpls.Nonzero [ZERO]`
+- **Target:** `jsonschemaimpls.Tuple [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 10)
+- **Functions:** 0/0 matched (target 4)
 - **Missing functions:** _none_
-- **Types:** 0/0 matched
+- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ### 26. json_schema_impls.decimal
@@ -317,29 +317,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 27. json_schema_impls.jiff02
+### 27. json_schema_impls.nonzero
 
-- **Target:** `jsonschemaimpls.Jiff02 [ZERO]`
+- **Target:** `jsonschemaimpls.Nonzero [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 5)
+- **Functions:** 0/0 matched (target 10)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 28. json_schema_impls.mod
-
-- **Target:** `jsonschemaimpls.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 1)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched
-- **Missing types:** _none_
-
-### 29. json_schema_impls.sequences
+### 28. json_schema_impls.sequences
 
 - **Target:** `jsonschemaimpls.Sequences [ZERO]`
 - **Similarity:** 0.00
@@ -350,24 +339,35 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 30. macros
+### 29. json_schema_impls.jiff02
+
+- **Target:** `jsonschemaimpls.Jiff02 [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 5)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
+- **Missing types:** _none_
+
+### 30. json_schema_impls.mod
+
+- **Target:** `jsonschemaimpls.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
+- **Missing types:** _none_
+
+### 31. macros
 
 - **Target:** `schemars.Macros [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
 - **Functions:** 0/0 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 31. json_schema_impls.tuple
-
-- **Target:** `jsonschemaimpls.Tuple [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 4)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -396,7 +396,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 34. consts
 
-- **Target:** `schemars.Consts`
+- **Target:** `schemars.Consts [PROVENANCE-FALLBACK]`
 - **Similarity:** 1.00
 - **Dependents:** 0
 - **Priority Score:** 0.0
@@ -404,6 +404,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `src/consts.rs` vs expected `consts.rs`
+- **Proposed provenance header:** `// port-lint: source consts.rs` (current: `// port-lint: source src/consts.rs`)
+- **Lint issues:** 1
 
 ## Success Criteria
 
@@ -414,13 +417,3 @@ For each file to be considered "complete":
 - Documentation ported
 - port-lint header present
 
-## Next Commands
-
-```bash
-# Initialize task queue for systematic porting
-cd tools/ast_distance
-./ast_distance --init-tasks ../../tmp/schemars/src rust ../../src/commonMain/kotlin/io/github/kotlinmania/schemars kotlin tasks.json ../../AGENTS.md
-
-# Get next high-priority task
-./ast_distance --assign tasks.json <agent-id>
-```

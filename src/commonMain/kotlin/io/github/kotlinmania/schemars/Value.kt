@@ -1,4 +1,3 @@
-// port-lint: ignore  -- shared in-package JSON value type used by Schema.
 package io.github.kotlinmania.schemars
 
 /** A JSON value: null, bool, number, string, array, or object with insertion-order entries. */

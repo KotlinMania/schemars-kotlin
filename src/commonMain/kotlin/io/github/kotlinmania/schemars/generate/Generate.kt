@@ -477,8 +477,7 @@ private fun jsonPointerMut(
     val rest = pointer.substring(1)
     if (rest.isEmpty()) return objectIn
 
-    var current: MutableMap<String, Value> = objectIn
-    for (rawSegment in rest.split('/')) {
+    return rest.split('/').fold(objectIn) { current, rawSegment ->
         val segment =
             if (rawSegment.contains('~')) {
                 rawSegment.replace("~1", "/").replace("~0", "~")
@@ -493,9 +492,8 @@ private fun jsonPointerMut(
                 current[segment] = newObj
                 newObj
             }
-        current = (next as? Value.Object)?.entries ?: return null
+        (next as? Value.Object)?.entries ?: return null
     }
-    return current
 }
 
 private object SchemaForValue {

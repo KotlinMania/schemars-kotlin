@@ -68,7 +68,7 @@ fun percentDecode(s: String): String? {
 
     val buf = ArrayList<Byte>()
     val segments = s.split('%')
-    val first = segments.firstOrNull() ?: ""
+    val first = segments.firstOrNull().orEmpty()
     for (b in first.encodeToByteArray()) buf.add(b)
 
     for (segment in segments.drop(1)) {

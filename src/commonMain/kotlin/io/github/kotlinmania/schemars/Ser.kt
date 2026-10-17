@@ -201,7 +201,7 @@ class SerializeMap internal constructor(
     }
 
     fun serializeValue(body: (Serializer) -> Schema) {
-        val key = currentKey ?: ""
+        val key = currentKey.orEmpty()
         currentKey = null
         val schema = body(Serializer(generator, includeTitle = false))
         properties[key] = schema.asValue()

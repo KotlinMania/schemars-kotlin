@@ -477,7 +477,7 @@ private class RestrictFormatsImpl(
         val previous = inferredFormats
 
         if (inferFromMetaSchema && obj.containsKey("\$schema")) {
-            val schemaVal = (obj["\$schema"] as? Value.Str)?.value ?: ""
+            val schemaVal = (obj["\$schema"] as? Value.Str)?.value.orEmpty()
             inferredFormats =
                 when (schemaVal) {
                     MetaSchemas.DRAFT07 -> {

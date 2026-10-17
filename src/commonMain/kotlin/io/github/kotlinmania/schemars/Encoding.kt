@@ -10,13 +10,19 @@ fun encodeRefName(name: String): String {
             // `~` and `/` need encoding for JSON Pointer
             // See https://datatracker.ietf.org/doc/html/rfc6901#section-3
             '~'.code, '/'.code -> true
+
             // These chars (and `~`) are valid in URL fragment
             // See https://datatracker.ietf.org/doc/html/rfc3986/#section-3.5
             '!'.code, '$'.code, '_'.code -> false
+
             in '&'.code..';'.code -> false
+
             '='.code -> false
+
             in '?'.code..'Z'.code -> false
+
             in 'a'.code..'z'.code -> false
+
             // Everything else needs percent-encoding
             else -> true
         }
@@ -30,13 +36,22 @@ fun encodeRefName(name: String): String {
     val buf = StringBuilder()
     for (byte in unsignedBytes) {
         when {
-            byte == '~'.code -> buf.append("~0")
-            byte == '/'.code -> buf.append("~1")
+            byte == '~'.code -> {
+                buf.append("~0")
+            }
+
+            byte == '/'.code -> {
+                buf.append("~1")
+            }
+
             needsEncoding(byte) -> {
                 buf.append('%')
                 buf.append(byte.toString(16).uppercase().padStart(2, '0'))
             }
-            else -> buf.append(byte.toChar())
+
+            else -> {
+                buf.append(byte.toChar())
+            }
         }
     }
     return buf.toString()

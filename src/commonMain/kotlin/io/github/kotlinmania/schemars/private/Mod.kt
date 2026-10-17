@@ -366,11 +366,13 @@ fun flatten(
                     current.items.addAll(value2.items)
                 }
             }
+
             "properties", "patternProperties" -> {
                 if (current is Value.Object && value2 is Value.Object) {
                     current.entries.putAll(value2.entries)
                 }
             }
+
             "oneOf", "anyOf" -> {
                 obj1.remove(key)
                 flattenProperty(
@@ -384,6 +386,7 @@ fun flatten(
                     ),
                 )
             }
+
             // leave the original value as it is (don't modify `schema`)
             else -> {}
         }
@@ -407,6 +410,7 @@ fun flatten(
                 }
             }
         }
+
         is io.github.kotlinmania.schemars.TryToObjectResult.Ok -> {
             val obj1 = schema.ensureObject()
             val obj2 = r.entries
@@ -482,6 +486,7 @@ internal fun allowNull(
                         instanceType.items.add(nullVal)
                     }
                 }
+
                 is Value.Str -> {
                     if (instanceType.value != "null") {
                         obj["type"] =
@@ -490,6 +495,7 @@ internal fun allowNull(
                             )
                     }
                 }
+
                 else -> {}
             }
 
@@ -505,6 +511,7 @@ internal fun allowNull(
                 }
             }
         }
+
         is io.github.kotlinmania.schemars.TryToObjectResult.Err -> {
             if (!r.bool) {
                 val unit = UnitSchema.jsonSchema(generator)

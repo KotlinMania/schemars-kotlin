@@ -1,4 +1,4 @@
-// port-lint: source src/consts.rs
+// port-lint: source consts.rs
 package io.github.kotlinmania.schemars
 
 /**

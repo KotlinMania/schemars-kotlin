@@ -4,14 +4,16 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 34/34 (100.0%)
-- **Function parity:** 160/181 matched (target 335) — 88.4%
-- **Class/type parity:** 28/39 matched (target 69) — 71.8%
-- **Combined symbol parity:** 188/220 matched (target 404) — 85.5%
-- **Average inline-code cosine:** 0.46 (function body across 32 matched files)
-- **Average documentation cosine:** 0.19 (doc text across 32 matched files)
-- **Cheat-zeroed Files:** 10
-- **Critical Issues:** 24 files with <0.60 function similarity
+- **Files Present:** 31/34 (91.2%)
+- **Function parity:** 176/209 matched (target 310) — 84.2%
+- **Class/type parity:** 24/33 matched (target 67) — 72.7%
+- **Combined symbol parity:** 200/242 matched (target 377) — 82.6%
+- **Average inline-code cosine:** 0.21 (function body across 31 matched files)
+- **Average documentation cosine:** 0.17 (doc text across 31 matched files)
+- **Cheat-zeroed Files:** 7
+- **Critical Issues:** 28 files with <0.60 function similarity
+- **Needs Review:** 0 files with 0.60-0.84 function similarity
+- **Excellent:** 3 files with >=0.85 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -32,19 +34,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Target:** `schemars.Schema [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 2
-- **Priority Score:** 2023010.0
-- **Functions:** 26/27 matched (target 52)
-- **Missing functions:** `eq`
+- **Priority Score:** 2104110.0
+- **Functions:** 29/38 matched (target 52)
+- **Missing functions:** `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `try_from`, `try_from`, `from`
 - **Types:** 2/3 matched (target 9)
 - **Missing types:** `Error`
 
 ### 2. generate
 
 - **Target:** `generate.Generate`
-- **Similarity:** 0.54
+- **Similarity:** 0.17
 - **Dependents:** 0
-- **Priority Score:** 155104.6
-- **Functions:** 31/44 matched (target 38)
+- **Priority Score:** 155208.3
+- **Functions:** 32/45 matched (target 38)
 - **Missing functions:** `clone`, `from`, `new`, `is`, `downcast_ref`, `downcast_mut`, `downcast`, `_as_any`, `_as_any_mut`, `_into_any`, `fmt`, `_assert_send`, `assert`
 - **Types:** 5/7 matched (target 6)
 - **Missing types:** `CowStr`, `GenTransform`
@@ -52,146 +54,144 @@ Every matched file is listed below with function and type symbol parity.
 ### 3. ser
 
 - **Target:** `schemars.Ser`
-- **Similarity:** 0.44
+- **Similarity:** 0.11
 - **Dependents:** 0
-- **Priority Score:** 73105.6
-- **Functions:** 20/21 matched (target 44)
-- **Missing functions:** `end`
+- **Priority Score:** 134108.9
+- **Functions:** 24/31 matched (target 44)
+- **Missing functions:** `end`, `end`, `end`, `end`, `end`, `end`, `end`
 - **Types:** 4/10 matched (target 5)
 - **Missing types:** `Ok`, `Error`, `SerializeTupleStruct`, `SerializeTupleVariant`, `SerializeStruct`, `SerializeStructVariant`
 
-### 4. _private.mod
-
-- **Target:** `private.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 32710.0
-- **Functions:** 21/22 matched
-- **Missing functions:** `nested_option_schemas`
-- **Types:** 3/5 matched (target 3)
-- **Missing types:** `NoSerialize`, `NoJsonSchema`
-- **Tests:** 0/1 matched
-
-### 5. transform
+### 4. transform
 
 - **Target:** `transform.Transform`
-- **Similarity:** 0.65
+- **Similarity:** 0.24
 - **Dependents:** 0
-- **Priority Score:** 21803.5
-- **Functions:** 4/6 matched (target 19)
-- **Missing functions:** `default`, `restrict_formats`
-- **Types:** 12/12 matched
+- **Priority Score:** 23007.6
+- **Functions:** 16/18 matched (target 20)
+- **Missing functions:** `default`, `default`
+- **Types:** 12/12 matched (target 13)
 - **Missing types:** _none_
-- **Tests:** 0/1 matched
+- **Tests:** 1/1 matched
 
-### 6. _private.rustdoc
+### 5. _private.rustdoc
 
 - **Target:** `private.Rustdoc`
-- **Similarity:** 0.51
+- **Similarity:** 0.15
 - **Dependents:** 0
-- **Priority Score:** 20604.9
+- **Priority Score:** 20608.5
 - **Functions:** 4/6 matched (target 5)
 - **Missing functions:** `subslice`, `to_utf8`
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 7. json_schema_impls.atomic
+### 6. json_schema_impls.core
 
-- **Target:** `jsonschemaimpls.Atomic [ZERO]`
-- **Similarity:** 0.00
+- **Target:** `jsonschemaimpls.Core`
+- **Similarity:** 0.15
 - **Dependents:** 0
-- **Priority Score:** 10110.0
-- **Functions:** 0/1 matched (target 0)
-- **Missing functions:** `schema_for_atomics`
-- **Types:** 0/0 matched
+- **Priority Score:** 1408.5
+- **Functions:** 14/14 matched (target 15)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 5)
 - **Missing types:** _none_
-- **Tests:** 0/1 matched
 
-### 8. encoding
+### 7. json_schema_impls.ffi
+
+- **Target:** `jsonschemaimpls.Ffi`
+- **Similarity:** 0.15
+- **Dependents:** 0
+- **Priority Score:** 608.5
+- **Functions:** 6/6 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 2)
+- **Missing types:** _none_
+
+### 8. json_schema_impls.chrono04
+
+- **Target:** `jsonschemaimpls.Chrono04`
+- **Similarity:** 0.18
+- **Dependents:** 0
+- **Priority Score:** 608.2
+- **Functions:** 6/6 matched (target 13)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 2)
+- **Missing types:** _none_
+
+### 9. json_schema_impls.std_time
+
+- **Target:** `jsonschemaimpls.StdTime`
+- **Similarity:** 0.19
+- **Dependents:** 0
+- **Priority Score:** 608.1
+- **Functions:** 6/6 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 2)
+- **Missing types:** _none_
+
+### 10. encoding
 
 - **Target:** `schemars.Encoding`
-- **Similarity:** 0.59
+- **Similarity:** 0.14
 - **Dependents:** 0
-- **Priority Score:** 504.1
+- **Priority Score:** 508.6
 - **Functions:** 5/5 matched (target 6)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 - **Tests:** 2/2 matched
 
-### 9. json_schema_impls.core
-
-- **Target:** `jsonschemaimpls.Core`
-- **Similarity:** 0.66
-- **Dependents:** 0
-- **Priority Score:** 503.4
-- **Functions:** 5/5 matched (target 15)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 5)
-- **Missing types:** _none_
-
-### 10. lib
-
-- **Target:** `schemars.JsonSchema`
-- **Similarity:** 0.91
-- **Dependents:** 0
-- **Priority Score:** 500.9
-- **Functions:** 4/4 matched
-- **Missing functions:** _none_
-- **Types:** 1/1 matched
-- **Missing types:** _none_
-
 ### 11. json_schema_impls.maps
 
 - **Target:** `jsonschemaimpls.Maps`
-- **Similarity:** 0.76
+- **Similarity:** 0.16
 - **Dependents:** 0
-- **Priority Score:** 402.4
+- **Priority Score:** 408.4
 - **Functions:** 3/3 matched (target 5)
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 12. json_schema_impls.bytes1
+### 12. json_schema_impls.serdejson
+
+- **Target:** `jsonschemaimpls.SerdeJson`
+- **Similarity:** 0.20
+- **Dependents:** 0
+- **Priority Score:** 408.0
+- **Functions:** 4/4 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 2)
+- **Missing types:** _none_
+
+### 13. json_schema_impls.either1
+
+- **Target:** `jsonschemaimpls.Either1`
+- **Similarity:** 0.05
+- **Dependents:** 0
+- **Priority Score:** 309.5
+- **Functions:** 3/3 matched (target 4)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 14. json_schema_impls.bytes1
 
 - **Target:** `jsonschemaimpls.Bytes1`
-- **Similarity:** 0.37
+- **Similarity:** 0.13
 - **Dependents:** 0
-- **Priority Score:** 306.3
+- **Priority Score:** 308.7
 - **Functions:** 3/3 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 13. json_schema_impls.ffi
+### 15. json_schema_impls.semver1
 
-- **Target:** `jsonschemaimpls.Ffi`
-- **Similarity:** 0.39
+- **Target:** `jsonschemaimpls.Semver1`
+- **Similarity:** 0.14
 - **Dependents:** 0
-- **Priority Score:** 306.1
-- **Functions:** 3/3 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 2)
-- **Missing types:** _none_
-
-### 14. json_schema_impls.chrono04
-
-- **Target:** `jsonschemaimpls.Chrono04`
-- **Similarity:** 0.43
-- **Dependents:** 0
-- **Priority Score:** 305.7
-- **Functions:** 3/3 matched (target 13)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 2)
-- **Missing types:** _none_
-
-### 15. json_schema_impls.primitives
-
-- **Target:** `jsonschemaimpls.Primitives`
-- **Similarity:** 0.44
-- **Dependents:** 0
-- **Priority Score:** 305.6
-- **Functions:** 3/3 matched (target 24)
+- **Priority Score:** 308.6
+- **Functions:** 3/3 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -199,100 +199,101 @@ Every matched file is listed below with function and type symbol parity.
 ### 16. json_schema_impls.array
 
 - **Target:** `jsonschemaimpls.Array`
-- **Similarity:** 0.45
+- **Similarity:** 0.20
 - **Dependents:** 0
-- **Priority Score:** 305.5
+- **Priority Score:** 308.0
 - **Functions:** 3/3 matched (target 8)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 17. json_schema_impls.url2
-
-- **Target:** `jsonschemaimpls.Url2`
-- **Similarity:** 0.45
-- **Dependents:** 0
-- **Priority Score:** 305.5
-- **Functions:** 3/3 matched (target 4)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 18. json_schema_impls.uuid1
+### 17. json_schema_impls.uuid1
 
 - **Target:** `jsonschemaimpls.Uuid1`
-- **Similarity:** 0.45
+- **Similarity:** 0.20
 - **Dependents:** 0
-- **Priority Score:** 305.5
+- **Priority Score:** 308.0
 - **Functions:** 3/3 matched (target 4)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 19. json_schema_impls.semver1
+### 18. json_schema_impls.url2
 
-- **Target:** `jsonschemaimpls.Semver1`
-- **Similarity:** 0.45
+- **Target:** `jsonschemaimpls.Url2`
+- **Similarity:** 0.20
 - **Dependents:** 0
-- **Priority Score:** 305.5
-- **Functions:** 3/3 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 20. json_schema_impls.std_time
-
-- **Target:** `jsonschemaimpls.StdTime`
-- **Similarity:** 0.46
-- **Dependents:** 0
-- **Priority Score:** 305.4
-- **Functions:** 3/3 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 2)
-- **Missing types:** _none_
-
-### 21. json_schema_impls.either1
-
-- **Target:** `jsonschemaimpls.Either1`
-- **Similarity:** 0.65
-- **Dependents:** 0
-- **Priority Score:** 303.5
+- **Priority Score:** 308.0
 - **Functions:** 3/3 matched (target 4)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 22. _private.regex_syntax
+### 19. json_schema_impls.primitives
+
+- **Target:** `jsonschemaimpls.Primitives`
+- **Similarity:** 0.21
+- **Dependents:** 0
+- **Priority Score:** 307.9
+- **Functions:** 3/3 matched (target 24)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 20. _private.regex_syntax
 
 - **Target:** `private.RegexSyntax`
-- **Similarity:** 0.84
+- **Similarity:** 0.43
 - **Dependents:** 0
-- **Priority Score:** 301.6
+- **Priority Score:** 305.7
 - **Functions:** 3/3 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 23. json_schema_impls.serdejson
-
-- **Target:** `jsonschemaimpls.SerdeJson`
-- **Similarity:** 0.46
-- **Dependents:** 0
-- **Priority Score:** 205.4
-- **Functions:** 2/2 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 2)
-- **Missing types:** _none_
-
-### 24. json_schema_impls.arrayvec07
+### 21. json_schema_impls.arrayvec07
 
 - **Target:** `jsonschemaimpls.Arrayvec07`
-- **Similarity:** 0.78
+- **Similarity:** 0.18
 - **Dependents:** 0
-- **Priority Score:** 202.2
+- **Priority Score:** 208.2
 - **Functions:** 2/2 matched (target 3)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 22. json_schema_impls.atomic
+
+- **Target:** `jsonschemaimpls.Atomic`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 110.0
+- **Functions:** 1/1 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+- **Tests:** 1/1 matched
+
+### 23. json_schema_impls.jiff02
+
+- **Target:** `jsonschemaimpls.Jiff02 [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 5)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
+- **Missing types:** _none_
+
+### 24. json_schema_impls.decimal
+
+- **Target:** `jsonschemaimpls.Decimal [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 4)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
 - **Missing types:** _none_
 
 ### 25. json_schema_impls.tuple
@@ -306,18 +307,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 26. json_schema_impls.decimal
-
-- **Target:** `jsonschemaimpls.Decimal [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 4)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched
-- **Missing types:** _none_
-
-### 27. json_schema_impls.nonzero
+### 26. json_schema_impls.nonzero
 
 - **Target:** `jsonschemaimpls.Nonzero [ZERO]`
 - **Similarity:** 0.00
@@ -326,6 +316,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Functions:** 0/0 matched (target 10)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched
+- **Missing types:** _none_
+
+### 27. macros
+
+- **Target:** `schemars.Macros [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ### 28. json_schema_impls.sequences
@@ -339,40 +340,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 29. json_schema_impls.jiff02
-
-- **Target:** `jsonschemaimpls.Jiff02 [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 5)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched
-- **Missing types:** _none_
-
-### 30. json_schema_impls.mod
-
-- **Target:** `jsonschemaimpls.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 1)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched
-- **Missing types:** _none_
-
-### 31. macros
-
-- **Target:** `schemars.Macros [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 32. json_schema_impls.wrapper
+### 29. json_schema_impls.wrapper
 
 - **Target:** `jsonschemaimpls.Wrapper`
 - **Similarity:** 1.00
@@ -383,7 +351,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 33. json_schema_impls.indexmap2
+### 30. consts
+
+- **Target:** `schemars.Consts`
+- **Similarity:** 1.00
+- **Dependents:** 0
+- **Priority Score:** 0.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 31. json_schema_impls.indexmap2
 
 - **Target:** `jsonschemaimpls.Indexmap2`
 - **Similarity:** 1.00
@@ -394,20 +373,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 34. consts
-
-- **Target:** `schemars.Consts [PROVENANCE-FALLBACK]`
-- **Similarity:** 1.00
-- **Dependents:** 0
-- **Priority Score:** 0.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `src/consts.rs` vs expected `consts.rs`
-- **Proposed provenance header:** `// port-lint: source consts.rs` (current: `// port-lint: source src/consts.rs`)
-- **Lint issues:** 1
-
 ## Success Criteria
 
 For each file to be considered "complete":
@@ -416,4 +381,19 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `_private.mod` | `private.Mod` | 0 | `_private/mod.rs` | `private/Mod.kt` |
+| `json_schema_impls.mod` | `jsonschemaimpls.Mod` | 0 | `json_schema_impls/mod.rs` | `jsonschemaimpls/Mod.kt` |
+| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 

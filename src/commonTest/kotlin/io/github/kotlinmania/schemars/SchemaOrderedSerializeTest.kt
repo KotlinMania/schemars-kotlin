@@ -1,4 +1,4 @@
-// port-lint: source schema.rs
+// port-lint: tests schema.rs
 package io.github.kotlinmania.schemars
 
 import io.github.kotlinmania.schemars.generate.SchemaGenerator

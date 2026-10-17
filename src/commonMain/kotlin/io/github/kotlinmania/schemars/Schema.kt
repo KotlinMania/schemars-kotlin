@@ -1,7 +1,10 @@
 // port-lint: source schema.rs
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+
 package io.github.kotlinmania.schemars
 
 import io.github.kotlinmania.schemars.generate.SchemaGenerator
+import kotlin.native.HiddenFromObjC
 
 /*
 JSON Schema types.
@@ -50,7 +53,8 @@ class Schema private constructor(
         }
 
         /** Construct a `Schema` from an object map of properties. */
-        internal fun from(o: MutableMap<String, Value>): Schema = Schema(Value.Object(o))
+        @HiddenFromObjC
+        fun from(o: MutableMap<String, Value>): Schema = Schema(Value.Object(o))
 
         /** Construct a `Schema` from a bool. */
         fun from(b: Boolean): Schema = Schema(Value.Bool(b))
@@ -62,7 +66,8 @@ class Schema private constructor(
          * Try to construct a `Schema` from a `Value`. Returns the wrapped schema on success or
          * a [SchemaConversionException] describing the unexpected type.
          */
-        internal fun tryFrom(value: Value): SchemaResult {
+        @HiddenFromObjC
+        fun tryFrom(value: Value): SchemaResult {
             validate(value)?.let { return SchemaResult.err(it) }
             return SchemaResult.ok(Schema(value))
         }
@@ -74,7 +79,8 @@ class Schema private constructor(
          * via `serde::de::Error::invalid_type`; the Kotlin port surfaces the same rejection via
          * [SchemaResult.error] carrying a [SchemaConversionError].
          */
-        internal fun deserialize(value: Value): SchemaResult = tryFrom(value)
+        @HiddenFromObjC
+        fun deserialize(value: Value): SchemaResult = tryFrom(value)
 
         internal fun validate(value: Value): SchemaConversionError? {
             val unexpected: String =
@@ -108,7 +114,8 @@ class Schema private constructor(
     }
 
     /** Borrows the `Schema`'s underlying JSON value. */
-    internal fun asValue(): Value = innerRef
+    @HiddenFromObjC
+    fun asValue(): Value = innerRef
 
     /** If the `Schema`'s underlying JSON value is a bool, returns the bool value. */
     fun asBool(): Boolean? = innerRef.asBool()
@@ -117,22 +124,26 @@ class Schema private constructor(
      * If the `Schema`'s underlying JSON value is an object, borrows the object as a `Map` of
      * properties.
      */
-    internal fun asObject(): MutableMap<String, Value>? = innerRef.asObject()
+    @HiddenFromObjC
+    fun asObject(): MutableMap<String, Value>? = innerRef.asObject()
 
     /**
      * If the `Schema`'s underlying JSON value is an object, mutably borrows the object as a `Map`
      * of properties.
      */
-    internal fun asObjectMut(): MutableMap<String, Value>? = innerRef.asObject()
+    @HiddenFromObjC
+    fun asObjectMut(): MutableMap<String, Value>? = innerRef.asObject()
 
-    internal fun tryToObject(): TryToObjectResult =
+    @HiddenFromObjC
+    fun tryToObject(): TryToObjectResult =
         when (val v = innerRef) {
             is Value.Object -> TryToObjectResult.Ok(v.entries)
             is Value.Bool -> TryToObjectResult.Err(v.value)
             else -> error("Schema inner value should always be Object or Bool")
         }
 
-    internal fun tryAsObjectMut(): TryToObjectResult =
+    @HiddenFromObjC
+    fun tryAsObjectMut(): TryToObjectResult =
         when (val v = innerRef) {
             is Value.Object -> TryToObjectResult.Ok(v.entries)
             is Value.Bool -> TryToObjectResult.Err(v.value)
@@ -140,7 +151,8 @@ class Schema private constructor(
         }
 
     /** Returns the `Schema`'s underlying JSON value. */
-    internal fun toValue(): Value = innerRef
+    @HiddenFromObjC
+    fun toValue(): Value = innerRef
 
     /**
      * Converts the `Schema` (if it wraps a bool value) into an equivalent object schema, then
@@ -150,7 +162,8 @@ class Schema private constructor(
      * possible values. `false` is transformed into the schema `{"not": {}}`, which does not
      * successfully validate against any value.
      */
-    internal fun ensureObject(): MutableMap<String, Value> {
+    @HiddenFromObjC
+    fun ensureObject(): MutableMap<String, Value> {
         val b = asBool()
         if (b != null) {
             val map = linkedMapOf<String, Value>()
@@ -168,7 +181,8 @@ class Schema private constructor(
      * If the schema wraps a bool value, it will first be converted into an equivalent object
      * schema via [ensureObject]. Returns the previous value, if any.
      */
-    internal fun insert(
+    @HiddenFromObjC
+    fun insert(
         k: String,
         v: Value,
     ): Value? {
@@ -182,7 +196,8 @@ class Schema private constructor(
      *
      * This always returns `null` for bool schemas.
      */
-    internal fun get(key: String): Value? = innerRef.asObject()?.get(key)
+    @HiddenFromObjC
+    fun get(key: String): Value? = innerRef.asObject()?.get(key)
 
     /**
      * If the `Schema`'s underlying JSON value is an object, gets a mutable reference to that
@@ -190,7 +205,8 @@ class Schema private constructor(
      *
      * This always returns `null` for bool schemas.
      */
-    internal fun getMut(key: String): Value? = innerRef.asObject()?.get(key)
+    @HiddenFromObjC
+    fun getMut(key: String): Value? = innerRef.asObject()?.get(key)
 
     /**
      * If the `Schema`'s underlying JSON value is an object, looks up a value within the schema
@@ -203,7 +219,8 @@ class Schema private constructor(
      *
      * This always returns `null` for bool schemas.
      */
-    internal fun pointer(pointer: String): Value? {
+    @HiddenFromObjC
+    fun pointer(pointer: String): Value? {
         return if (pointer.startsWith("#")) {
             val decoded = percentDecode(pointer.substring(1)) ?: return null
             innerRef.pointer(decoded)
@@ -223,15 +240,17 @@ class Schema private constructor(
      *
      * This always returns `null` for bool schemas.
      */
-    internal fun pointerMut(pointer: String): Value? = pointer(pointer)
+    @HiddenFromObjC
+    fun pointerMut(pointer: String): Value? = pointer(pointer)
 
     /**
      * If the `Schema`'s underlying JSON value is an object, removes and returns its value for the
      * given key. Always returns `null` for bool schemas, without modifying them.
      */
-    internal fun remove(key: String): Value? = innerRef.asObject()?.remove(key)
+    @HiddenFromObjC
+    fun remove(key: String): Value? = innerRef.asObject()?.remove(key)
 
-    internal fun hasType(ty: String): Boolean =
+    fun hasType(ty: String): Boolean =
         when (val t = innerRef.asObject()?.get("type")) {
             is Value.Array -> t.items.any { it.asStr() == ty }
             is Value.Str -> t.value == ty
@@ -279,7 +298,8 @@ class Schema private constructor(
      * to produce a JSON string; the Kotlin port leaves the string-encoding step to whatever
      * downstream JSON writer the consumer already uses against the [Value] tree.
      */
-    internal fun serialize(): Value = OrderedKeywordWrapper.from(innerRef).serialize()
+    @HiddenFromObjC
+    fun serialize(): Value = OrderedKeywordWrapper.from(innerRef).serialize()
 
     /**
      * Mirrors the upstream `impl JsonSchema for Schema`. Rust's trait functions are type-level
@@ -428,8 +448,9 @@ class SchemaConversionError internal constructor(
     override fun toString(): String = "SchemaConversionError($message)"
 }
 
-/** The internal exception thrown when getOrThrow() fails. */
-internal class SchemaConversionException(
+/** The exception thrown when [SchemaResult.getOrThrow] fails. */
+@HiddenFromObjC
+class SchemaConversionException(
     val error: SchemaConversionError,
 ) : RuntimeException(error.message)
 
@@ -467,7 +488,8 @@ class SchemaResult internal constructor(
 }
 
 /** Result of [Schema.tryToObject] / [Schema.tryAsObjectMut]. */
-internal sealed class TryToObjectResult {
+@HiddenFromObjC
+sealed class TryToObjectResult {
     data class Ok(
         val entries: MutableMap<String, Value>,
     ) : TryToObjectResult()
@@ -481,4 +503,5 @@ internal sealed class TryToObjectResult {
 fun Boolean.toSchema(): Schema = Schema.from(this)
 
 /** Convert an object map to a `Schema` using `Schema.from(this)`. */
-internal fun MutableMap<String, Value>.toSchema(): Schema = Schema.from(this)
+@HiddenFromObjC
+fun MutableMap<String, Value>.toSchema(): Schema = Schema.from(this)

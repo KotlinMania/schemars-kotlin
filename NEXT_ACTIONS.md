@@ -5,9 +5,9 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 31/34 (91.2%)
-- **Function parity:** 176/209 matched (target 310) — 84.2%
+- **Function parity:** 177/209 matched (target 316) — 84.7%
 - **Class/type parity:** 24/33 matched (target 67) — 72.7%
-- **Combined symbol parity:** 200/242 matched (target 377) — 82.6%
+- **Combined symbol parity:** 201/242 matched (target 383) — 83.1%
 - **Average inline-code cosine:** 0.21 (function body across 31 matched files)
 - **Average documentation cosine:** 0.17 (doc text across 31 matched files)
 - **Cheat-zeroed Files:** 7
@@ -45,9 +45,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Target:** `generate.Generate`
 - **Similarity:** 0.17
 - **Dependents:** 0
-- **Priority Score:** 155208.3
-- **Functions:** 32/45 matched (target 38)
-- **Missing functions:** `clone`, `from`, `new`, `is`, `downcast_ref`, `downcast_mut`, `downcast`, `_as_any`, `_as_any_mut`, `_into_any`, `fmt`, `_assert_send`, `assert`
+- **Priority Score:** 145208.3
+- **Functions:** 33/45 matched (target 39)
+- **Missing functions:** `clone`, `from`, `is`, `downcast_ref`, `downcast_mut`, `downcast`, `_as_any`, `_as_any_mut`, `_into_any`, `fmt`, `_assert_send`, `assert`
 - **Types:** 5/7 matched (target 6)
 - **Missing types:** `CowStr`, `GenTransform`
 
@@ -169,7 +169,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.05
 - **Dependents:** 0
 - **Priority Score:** 309.5
-- **Functions:** 3/3 matched (target 4)
+- **Functions:** 3/3 matched (target 5)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -180,7 +180,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.13
 - **Dependents:** 0
 - **Priority Score:** 308.7
-- **Functions:** 3/3 matched
+- **Functions:** 3/3 matched (target 5)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -191,7 +191,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.14
 - **Dependents:** 0
 - **Priority Score:** 308.6
-- **Functions:** 3/3 matched
+- **Functions:** 3/3 matched (target 4)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -213,7 +213,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.20
 - **Dependents:** 0
 - **Priority Score:** 308.0
-- **Functions:** 3/3 matched (target 4)
+- **Functions:** 3/3 matched (target 5)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_

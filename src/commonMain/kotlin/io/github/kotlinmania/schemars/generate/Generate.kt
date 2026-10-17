@@ -210,7 +210,7 @@ internal data class SchemaUid(
 /**
  * The main type used to generate JSON Schemas.
  */
-class SchemaGenerator internal constructor(
+class SchemaGenerator(
     private var settings: SchemaSettings,
 ) {
     private val definitions: MutableMap<String, Value> = linkedMapOf()
@@ -225,6 +225,9 @@ class SchemaGenerator internal constructor(
     companion object {
         /** Creates a `SchemaGenerator` using the default [SchemaSettings]. */
         fun default(): SchemaGenerator = SchemaSettings.default().intoGenerator()
+
+        /** Creates a new `SchemaGenerator` using the given settings. */
+        fun new(settings: SchemaSettings): SchemaGenerator = SchemaGenerator(settings)
     }
 
     /** Borrows the [SchemaSettings] being used by this `SchemaGenerator`. */
@@ -306,10 +309,12 @@ class SchemaGenerator internal constructor(
      * Borrows the collection of all non-inlined schemas that have been generated. The keys are the
      * schema names, and the values are the schemas themselves.
      */
-    internal fun definitions(): MutableMap<String, Value> = definitions
+    @HiddenFromObjC
+    fun definitions(): MutableMap<String, Value> = definitions
 
     /** Mutable variant of [definitions]; same return value. */
-    internal fun definitionsMut(): MutableMap<String, Value> = definitions
+    @HiddenFromObjC
+    fun definitionsMut(): MutableMap<String, Value> = definitions
 
     /**
      * Returns the collection of all non-inlined schemas that have been generated, leaving an empty
@@ -318,7 +323,8 @@ class SchemaGenerator internal constructor(
      * To apply this generator's transforms to each of the returned schemas, set [applyTransforms]
      * to `true`.
      */
-    internal fun takeDefinitions(applyTransforms: Boolean): MutableMap<String, Value> {
+    @HiddenFromObjC
+    fun takeDefinitions(applyTransforms: Boolean): MutableMap<String, Value> {
         val taken: MutableMap<String, Value> = linkedMapOf()
         taken.putAll(definitions)
         definitions.clear()
@@ -337,7 +343,8 @@ class SchemaGenerator internal constructor(
     }
 
     /** Returns a sequence over the [transforms][SchemaSettings.transforms] used by this generator. */
-    internal fun transformsMut(): MutableList<Transform> {
+    @HiddenFromObjC
+    fun transformsMut(): MutableList<Transform> {
         val m = settings.transforms as? MutableList<Transform> ?: settings.transforms.toMutableList()
         settings.transforms = m
         return m
@@ -396,7 +403,8 @@ class SchemaGenerator internal constructor(
      * If the value implements [JsonSchema], prefer [rootSchemaFor] which generally produces a
      * more precise schema, particularly when the value contains any enums.
      */
-    internal fun rootSchemaForValue(value: Value): Schema {
+    @HiddenFromObjC
+    fun rootSchemaForValue(value: Value): Schema {
         val schema = SchemaForValue.of(value, includeTitle = true)
 
         val obj = schema.ensureObject()
@@ -409,7 +417,8 @@ class SchemaGenerator internal constructor(
     }
 
     /** Consumes `this` and generates a root schema for the given example value. */
-    internal fun intoRootSchemaForValue(value: Value): Schema {
+    @HiddenFromObjC
+    fun intoRootSchemaForValue(value: Value): Schema {
         val schema = SchemaForValue.of(value, includeTitle = true)
         val obj = schema.ensureObject()
         obj["examples"] = Value.Array(mutableListOf(value))

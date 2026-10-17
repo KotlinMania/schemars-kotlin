@@ -1,10 +1,14 @@
 // port-lint: source json_schema_impls/either1.rs
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+
 package io.github.kotlinmania.schemars.jsonschemaimpls
 
+import io.github.kotlinmania.either.Either
 import io.github.kotlinmania.schemars.JsonSchema
 import io.github.kotlinmania.schemars.Schema
 import io.github.kotlinmania.schemars.generate.SchemaGenerator
 import io.github.kotlinmania.schemars.jsonSchema
+import kotlin.native.HiddenFromObjC
 
 class EitherSchema(
     val left: JsonSchema,
@@ -35,3 +39,10 @@ class EitherSchema(
                 )
         }
 }
+
+/** Return the schema implementation for an [Either] value. */
+@HiddenFromObjC
+fun <L, R> Either<L, R>.eitherJsonSchema(
+    left: JsonSchema,
+    right: JsonSchema,
+): JsonSchema = EitherSchema(left, right)

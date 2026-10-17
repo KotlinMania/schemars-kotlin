@@ -1,4 +1,4 @@
-// port-lint: source encoding.rs
+// port-lint: tests encoding.rs
 package io.github.kotlinmania.schemars
 
 import kotlin.test.Test

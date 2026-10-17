@@ -477,8 +477,7 @@ private fun jsonPointerMut(
     val rest = pointer.substring(1)
     if (rest.isEmpty()) return objectIn
 
-    var current: MutableMap<String, Value> = objectIn
-    for (rawSegment in rest.split('/')) {
+    return rest.split('/').fold(objectIn) { current, rawSegment ->
         val segment =
             if (rawSegment.contains('~')) {
                 rawSegment.replace("~1", "/").replace("~0", "~")
@@ -493,9 +492,8 @@ private fun jsonPointerMut(
                 current[segment] = newObj
                 newObj
             }
-        current = (next as? Value.Object)?.entries ?: return null
+        (next as? Value.Object)?.entries ?: return null
     }
-    return current
 }
 
 private object SchemaForValue {
@@ -512,9 +510,15 @@ private object SchemaForValue {
 
     private fun describe(value: Value): Schema =
         when (value) {
-            is Value.Null -> Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("null")))).getOrThrow()
-            is Value.Bool -> Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("boolean")))).getOrThrow()
-            is Value.Number ->
+            is Value.Null -> {
+                Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("null")))).getOrThrow()
+            }
+
+            is Value.Bool -> {
+                Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("boolean")))).getOrThrow()
+            }
+
+            is Value.Number -> {
                 Schema
                     .tryFrom(
                         Value.Object(
@@ -523,8 +527,16 @@ private object SchemaForValue {
                             ),
                         ),
                     ).getOrThrow()
-            is Value.Str -> Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("string")))).getOrThrow()
-            is Value.Array -> Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("array")))).getOrThrow()
+            }
+
+            is Value.Str -> {
+                Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("string")))).getOrThrow()
+            }
+
+            is Value.Array -> {
+                Schema.tryFrom(Value.Object(linkedMapOf("type" to Value.Str("array")))).getOrThrow()
+            }
+
             is Value.Object -> {
                 val props = linkedMapOf<String, Value>()
                 for ((k, v) in value.entries) {

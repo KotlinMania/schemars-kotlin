@@ -30,4 +30,3 @@ class Indexmap2Test {
         assertEquals(Value.Bool(true), schema.entries["uniqueItems"])
     }
 }
-

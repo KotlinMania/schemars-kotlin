@@ -28,5 +28,6 @@ private fun isMetaCharacter(c: Char): Boolean =
         '\\', '.', '+', '*', '?', '(', ')', '|', '[', ']', '{', '}', '^', '$',
         '#', '&', '-', '~',
         -> true
+
         else -> false
     }

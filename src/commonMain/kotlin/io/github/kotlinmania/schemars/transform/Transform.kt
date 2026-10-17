@@ -68,6 +68,7 @@ fun transformSubschemas(
                     writeBack(obj, key, it)
                 }
             }
+
             "allOf", "anyOf", "oneOf", "prefixItems" -> {
                 (value as? Value.Array)?.items?.let { array ->
                     for (i in array.indices) {
@@ -78,6 +79,7 @@ fun transformSubschemas(
                     }
                 }
             }
+
             // Support `items` array even though this is not allowed in draft 2020-12 (see above
             // comment)
             "items" -> {
@@ -93,6 +95,7 @@ fun transformSubschemas(
                                 }
                         }
                     }
+
                     else -> {
                         Schema.tryFrom(value).getOrNull()?.let {
                             t.transform(it)
@@ -101,6 +104,7 @@ fun transformSubschemas(
                     }
                 }
             }
+
             "properties", "patternProperties", "\$defs", "definitions" -> {
                 (value as? Value.Object)?.entries?.let { sub ->
                     val subKeys = sub.keys.toList()
@@ -144,6 +148,7 @@ internal fun transformImmediateSubschemas(
                     obj[key] = it.asValue()
                 }
             }
+
             "allOf", "anyOf", "oneOf" -> {
                 (value as? Value.Array)?.items?.let { array ->
                     for (i in array.indices) {
@@ -329,6 +334,7 @@ class AddNullable(
                         schema.asObjectMut()?.set("type", Value.Array(mutableListOf()))
                     }
                 }
+
                 removeNullType && ty is Value.Array -> {
                     val arrItems = ty.items
                     arrItems.removeAll { it.asStr() == "null" }
@@ -471,11 +477,17 @@ private class RestrictFormatsImpl(
         val previous = inferredFormats
 
         if (inferFromMetaSchema && obj.containsKey("\$schema")) {
-            val schemaVal = (obj["\$schema"] as? Value.Str)?.value ?: ""
+            val schemaVal = (obj["\$schema"] as? Value.Str)?.value.orEmpty()
             inferredFormats =
                 when (schemaVal) {
-                    MetaSchemas.DRAFT07 -> DEFINED_FORMATS.drop(2)
-                    MetaSchemas.DRAFT2019_09, MetaSchemas.DRAFT2020_12 -> DEFINED_FORMATS.toList()
+                    MetaSchemas.DRAFT07 -> {
+                        DEFINED_FORMATS.drop(2)
+                    }
+
+                    MetaSchemas.DRAFT2019_09, MetaSchemas.DRAFT2020_12 -> {
+                        DEFINED_FORMATS.toList()
+                    }
+
                     else -> {
                         // we can't handle an unrecognised meta-schema
                         return

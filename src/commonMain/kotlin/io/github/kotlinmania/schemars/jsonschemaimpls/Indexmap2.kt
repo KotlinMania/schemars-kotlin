@@ -23,4 +23,3 @@ class IndexMapSchema<K, V>(
 class IndexSetSchema<T>(
     inner: JsonSchema,
 ) : JsonSchema by SetSchema(inner)
-

@@ -110,12 +110,18 @@ internal sealed class Value {
             val decoded = token.replace("~1", "/").replace("~0", "~")
             cur =
                 when (cur) {
-                    is Object -> cur.entries[decoded] ?: return null
+                    is Object -> {
+                        cur.entries[decoded] ?: return null
+                    }
+
                     is Array -> {
                         val idx = decoded.toIntOrNull() ?: return null
                         cur.items.getOrNull(idx) ?: return null
                     }
-                    else -> return null
+
+                    else -> {
+                        return null
+                    }
                 }
         }
         return cur
@@ -125,28 +131,74 @@ internal sealed class Value {
         /** Coerce a Kotlin value to [Value]. */
         fun of(v: Any?): Value =
             when (v) {
-                null -> Null
-                is Value -> v
-                is Schema -> v.asValue()
-                is Boolean -> Bool(v)
-                is Int -> Number.fromInt(v)
-                is Long -> Number.fromLong(v)
-                is Short -> Number.fromInt(v.toInt())
-                is Byte -> Number.fromInt(v.toInt())
-                is UInt -> Number.fromUInt(v)
-                is ULong -> Number.fromULong(v)
-                is Double -> Number.fromDouble(v)
-                is Float -> Number.fromDouble(v.toDouble())
-                is String -> Str(v)
-                is List<*> -> Array(v.mapTo(mutableListOf()) { of(it) })
-                is Map<*, *> ->
+                null -> {
+                    Null
+                }
+
+                is Value -> {
+                    v
+                }
+
+                is Schema -> {
+                    v.asValue()
+                }
+
+                is Boolean -> {
+                    Bool(v)
+                }
+
+                is Int -> {
+                    Number.fromInt(v)
+                }
+
+                is Long -> {
+                    Number.fromLong(v)
+                }
+
+                is Short -> {
+                    Number.fromInt(v.toInt())
+                }
+
+                is Byte -> {
+                    Number.fromInt(v.toInt())
+                }
+
+                is UInt -> {
+                    Number.fromUInt(v)
+                }
+
+                is ULong -> {
+                    Number.fromULong(v)
+                }
+
+                is Double -> {
+                    Number.fromDouble(v)
+                }
+
+                is Float -> {
+                    Number.fromDouble(v.toDouble())
+                }
+
+                is String -> {
+                    Str(v)
+                }
+
+                is List<*> -> {
+                    Array(v.mapTo(mutableListOf()) { of(it) })
+                }
+
+                is Map<*, *> -> {
                     Object(
                         v.entries.fold(linkedMapOf<String, Value>()) { acc, e ->
                             acc[e.key.toString()] = of(e.value)
                             acc
                         },
                     )
-                else -> error("Unsupported Value source: ${v::class}")
+                }
+
+                else -> {
+                    error("Unsupported Value source: ${v::class}")
+                }
             }
     }
 }

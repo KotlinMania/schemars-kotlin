@@ -79,16 +79,29 @@ class Schema private constructor(
         internal fun validate(value: Value): SchemaConversionError? {
             val unexpected: String =
                 when (value) {
-                    is Value.Bool, is Value.Object -> return null
-                    is Value.Null -> "unit"
-                    is Value.Number ->
+                    is Value.Bool, is Value.Object -> {
+                        return null
+                    }
+
+                    is Value.Null -> {
+                        "unit"
+                    }
+
+                    is Value.Number -> {
                         when (value.value) {
                             is Int, is Long, is Short, is Byte -> "integer ${value.asLong()}"
                             is Double, is Float -> "float ${value.asDouble()}"
                             else -> "number ${value.value}"
                         }
-                    is Value.Str -> "string ${value.value}"
-                    is Value.Array -> "sequence"
+                    }
+
+                    is Value.Str -> {
+                        "string ${value.value}"
+                    }
+
+                    is Value.Array -> {
+                        "sequence"
+                    }
                 }
             return SchemaConversionError("invalid type: $unexpected, expected object or boolean")
         }
@@ -227,15 +240,30 @@ class Schema private constructor(
 
     override fun equals(other: Any?): Boolean =
         when {
-            other === this -> true
-            other is Schema -> other.innerRef == innerRef
-            other is Boolean -> asBool() == other
+            other === this -> {
+                true
+            }
+
+            other is Schema -> {
+                other.innerRef == innerRef
+            }
+
+            other is Boolean -> {
+                asBool() == other
+            }
+
             other is Map<*, *> -> {
                 val obj = innerRef.asObject() ?: return false
                 obj == other
             }
-            other is Value -> innerRef == other
-            else -> false
+
+            other is Value -> {
+                innerRef == other
+            }
+
+            else -> {
+                false
+            }
         }
 
     override fun hashCode(): Int = innerRef.hashCode()
@@ -316,11 +344,13 @@ internal class OrderedKeywordWrapper private constructor(
 
     internal fun serialize(): Value =
         when (val v = value) {
-            is Value.Array ->
+            is Value.Array -> {
                 Value.Array(
                     v.items.mapTo(mutableListOf()) { OrderedKeywordWrapper.from(it).serialize() },
                 )
-            is Value.Object ->
+            }
+
+            is Value.Object -> {
                 if (noReorder) {
                     // Upstream: `Value::Object(object) if self.no_reorder`. Direct properties keep
                     // insertion order; nested subschema values still get re-ordered via the default
@@ -349,9 +379,13 @@ internal class OrderedKeywordWrapper private constructor(
                     }
                     Value.Object(out)
                 }
+            }
+
             // Upstream: `Value::Null | Value::Bool(_) | Value::Number(_) | Value::String(_) =>
             // self.value.serialize(serializer)` — every primitive flows through unchanged.
-            is Value.Null, is Value.Bool, is Value.Number, is Value.Str -> v
+            is Value.Null, is Value.Bool, is Value.Number, is Value.Str -> {
+                v
+            }
         }
 
     /**

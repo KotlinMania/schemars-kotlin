@@ -5,7 +5,6 @@ import io.github.kotlinmania.schemars.JsonSchema
 import io.github.kotlinmania.schemars.Schema
 import io.github.kotlinmania.schemars.Value
 import io.github.kotlinmania.schemars.generate.SchemaGenerator
-import io.github.kotlinmania.schemars.jsonSchema
 
 /*
  *

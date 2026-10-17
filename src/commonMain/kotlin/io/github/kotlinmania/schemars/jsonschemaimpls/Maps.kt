@@ -87,15 +87,25 @@ class MapSchema(
             val keyMinimum = (option["minimum"] as? Value.Number)?.asULong()
 
             when {
-                keyPattern != null && keyType == "string" -> patterns.add(keyPattern)
+                keyPattern != null && keyType == "string" -> {
+                    patterns.add(keyPattern)
+                }
+
                 keyPattern == null && keyEnum != null && keyType == "string" -> {
                     properties.addAll(keyEnum)
                 }
-                keyType == "integer" && keyMinimum?.toLong() == 0L ->
+
+                keyType == "integer" && keyMinimum?.toLong() == 0L -> {
                     supportIntegers = maxOf(supportIntegers, IntegerSupport.Unsigned)
-                keyType == "integer" ->
+                }
+
+                keyType == "integer" -> {
                     supportIntegers = maxOf(supportIntegers, IntegerSupport.Signed)
-                else -> additionalProperties = true
+                }
+
+                else -> {
+                    additionalProperties = true
+                }
             }
         }
 
@@ -107,8 +117,14 @@ class MapSchema(
 
         when (supportIntegers) {
             IntegerSupport.None -> {}
-            IntegerSupport.Unsigned -> patterns.add("^\\d+\$")
-            IntegerSupport.Signed -> patterns.add("^-?\\d+\$")
+
+            IntegerSupport.Unsigned -> {
+                patterns.add("^\\d+\$")
+            }
+
+            IntegerSupport.Signed -> {
+                patterns.add("^-?\\d+\$")
+            }
         }
 
         if (patterns.isNotEmpty()) {

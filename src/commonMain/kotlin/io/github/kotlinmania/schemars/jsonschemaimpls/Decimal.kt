@@ -21,10 +21,13 @@ private fun decimalImpl(): JsonSchema =
         override fun jsonSchema(generator: SchemaGenerator): Schema {
             val (ty, pattern) =
                 when (generator.contract()) {
-                    io.github.kotlinmania.schemars.generate.Contract.Deserialize ->
+                    io.github.kotlinmania.schemars.generate.Contract.Deserialize -> {
                         Pair(listOf("string", "number"), "^-?\\d+(\\.\\d+)?([eE]\\d+)?\$")
-                    io.github.kotlinmania.schemars.generate.Contract.Serialize ->
+                    }
+
+                    io.github.kotlinmania.schemars.generate.Contract.Serialize -> {
                         Pair("string", "^-?\\d+(\\.\\d+)?\$")
+                    }
                 }
             return jsonSchema {
                 this["type"] = ty

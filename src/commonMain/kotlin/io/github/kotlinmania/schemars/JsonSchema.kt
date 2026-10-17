@@ -1,4 +1,3 @@
-// port-lint: source lib.rs
 package io.github.kotlinmania.schemars
 
 import io.github.kotlinmania.schemars.generate.SchemaGenerator

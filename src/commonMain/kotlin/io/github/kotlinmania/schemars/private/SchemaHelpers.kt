@@ -205,10 +205,11 @@ internal class AllowUnknownProperties(
     }
 }
 
-internal class MaybeSerializeWrapper(
+@HiddenFromObjC
+class MaybeSerializeWrapper(
     val value: Value?,
 ) {
-    internal fun maybeToValue(): Value? = value
+    fun maybeToValue(): Value? = value
 }
 
 /** Create a schema for a unit enum variant. */
@@ -301,7 +302,8 @@ fun insertMetadataPropertyIfNonempty(
     }
 }
 
-internal fun insertValidationProperty(
+@HiddenFromObjC
+fun insertValidationProperty(
     schema: Schema,
     requiredType: String,
     key: String,
@@ -441,7 +443,7 @@ private fun normaliseAdditionalUnevaluatedProperties(
 private fun containsImmediateSubschema(schemaObj: Map<String, Value>): Boolean =
     listOf("if", "allOf", "anyOf", "oneOf", "\$ref").any { schemaObj.containsKey(it) }
 
-internal fun allowNull(
+fun allowNull(
     generator: SchemaGenerator,
     schema: Schema,
 ) {

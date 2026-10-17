@@ -1,7 +1,12 @@
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+
 package io.github.kotlinmania.schemars
 
+import kotlin.native.HiddenFromObjC
+
 /** A JSON value: null, bool, number, string, array, or object with insertion-order entries. */
-internal sealed class Value {
+@HiddenFromObjC
+sealed class Value {
     /** JSON `null`. */
     data object Null : Value()
 
